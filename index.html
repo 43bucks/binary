@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      h1 {
+        font-size: 34px;
+        color: rgb(238, 175, 81);
+      }
+      body {
+        /* display: inline; */
+        text-align: center;
+        padding: 20px;
+        overflow: hidden;
+        background: linear-gradient(
+          270deg,
+          rgb(153, 116, 84),
+          rgb(166, 166, 201),rgb(159, 202, 202)
+        );
+        background-size: 400% 400%;
+        animation: gradientAnimation 15s ease infinite;
+      }
+
+      label {
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      select {
+        width: 50%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid rgb(165, 127, 84);
+        border-radius: 15px;
+      }
+     
+
+      button {
+        background-color: rgb(229, 204, 173);
+        color: rgb(61, 70, 10);
+        border: none;
+        padding: 10px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        margin-top: 15px;
+      }
+
+      button:hover {
+        background-color: rgb(116, 68, 29);
+      }
+
+      h2 {
+        margin-top: 20px;
+      }
+      #tobase {
+        opacity: 10%;
+      }
+
+      .moving-text {
+        position: absolute;
+        bottom: 10px;
+        left: -100%;
+        right: 0%;
+        color: rgb(22, 16, 16);
+        white-space: nowrap;
+        animation: moveText 15s linear infinite;
+      }
+
+      @keyframes moveText {
+        from {
+            transform: translateX(100%);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+      }
+
+      @keyframes gradientAnimation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Number Base Converter</h1>
+      <label for="number"
+        ><span style="color: rgb(223, 150, 15); font-size: 20px"
+          >Input no:</span
+        ></label
+      >
+      <input type="text" id="number" placeholder="input no here" />
+
+      <label for="fromBase"
+        ><span style="color: rgb(228, 158, 9)">From Base:</span></label
+      >
+      <select id="fromBase">
+        <option value="2">Binary</option>
+        <option value="10">Decimal</option>
+        <option value="8">Octal</option>
+        <option value="16">Hexadecimal</option>
+      </select>
+
+      <label for="toBase"
+        ><span style="color: rgb(219, 166, 96)">To Base:</span></label
+      >
+      <select id="toBase">
+        <option value="2">Binary</option>
+        <option value="10">Decimal</option>
+        <option value="8">Octal</option>
+        <option value="16">Hexadecimal</option>
+      </select>
+      <br />
+      <button onclick="convert()">Convert</button>
+
+      <h2>Converted Value: <span id="convertedValue"></span></h2>
+
+      <script>
+        function convert() {
+          let number = document.getElementById("number").value;
+          let fromBase = parseInt(document.getElementById("fromBase").value);
+          let toBase = parseInt(document.getElementById("toBase").value);
+
+          let decimalNumber = parseInt(number, fromBase);
+
+          let convertedValue = decimalNumber.toString(toBase);
+
+          document.getElementById("convertedValue").innerText =
+            convertedValue.toLowerCase();
+
+          // function isValidNumber(number, base) {
+          //     const validChars = "0123456789abcdef";
+          //     for (let char of number.toLowercase()) {
+          //         if (validChars.indexOf(char) >= base) {
+          //             return false;
+          //         }
+          //     }
+          //     return true;
+          // }
+          // dint work as expected
+        }
+      </script>
+    </div>
+    <div class="moving-text">
+      This is glitch, reverse binary converter ASCII "enjoy"
+    </div>
+  </body>
+</html>
